@@ -103,10 +103,7 @@ def change_password(request, token):
             user_obj.set_password(cpassword)
             user_obj.save()
             return redirect('index')
-        
     
-
-
     except Exception as e:
         print(e)
 
@@ -122,8 +119,20 @@ def base(request):
 def index(request):
     error_message = request.GET.get('error_message', None)
     hero_area_data = hero_area.objects.all()
+    Our_Most_Popular_Tours = Our_Most_Popular_Tour.objects.all()
+    Our_Best_Deals = Our_Best_Deal.objects.all()
+    Video_sections = Video_section.objects.all()
+    partner_logos = partner_logo.objects.all()
+    testimonials = testimonial.objects.all()
+    Blogs = Blog.objects.all()
     context = {
         'hero_area_data' : hero_area_data,
+        'Our_Most_Popular_Tour':Our_Most_Popular_Tours,
+        'Our_Best_Deal':Our_Best_Deals,
+        'Video_section':Video_sections,
+        'partner_logo':partner_logos,
+        'testimonial':testimonials,
+        'Blog':Blogs,
         'error_message':error_message
     }
     return render(request, 'index.html', context)
@@ -264,7 +273,6 @@ def flight_pricing(request):
             print(e)
             messages.error(request, 'Somthing went wrong')
             return redirect('index')
-
 
 def Rflight_pricing(request):
     if request.method == "POST":
@@ -523,8 +531,6 @@ def Rflight_booking(request):
 
 def contact(request):
     return render(request, 'contact.html')
-
-
 # payment
 def create_order(request):
     pass
